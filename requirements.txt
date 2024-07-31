@@ -1,0 +1,8 @@
+python-dotenv
+langchain
+langchain-community
+langchainhub
+langchain-chroma
+chromadb==0.5.3
+pypdf
+PyMuPDF
