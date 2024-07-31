@@ -6,8 +6,8 @@ import streamlit as st
 import get_chain_elements
 
 
-history_aware_retriever = get_chain_elements.get_history_aware_retriever()
 question_answer_chain = get_chain_elements.get_question_answer_chain()
+history_aware_retriever = get_chain_elements.get_history_aware_retriever()
 
 ### Statefully manage chat history ###
 store = {}
