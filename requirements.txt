@@ -6,3 +6,4 @@ langchain-chroma
 chromadb==0.5.3
 pypdf
 PyMuPDF
+langchain_openai
