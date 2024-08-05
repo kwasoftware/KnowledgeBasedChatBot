@@ -4,6 +4,10 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 import streamlit as st
 import upload_file
 
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 data = upload_file.get_doc()
 
 #Splits the loaded data and stores the split data into vectors to be retrieved later on
