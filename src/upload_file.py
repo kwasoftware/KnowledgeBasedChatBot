@@ -4,14 +4,20 @@ import streamlit as st
 st.title("Knowledge Bot")
 
 #Uploads the file from the pdf
-def get_doc():
-    uploaded_file = st.sidebar.file_uploader(label="Choose a file", 
-                                     accept_multiple_files=False, 
-                                     type=['pdf'])
-    while uploaded_file is None:
-        uploaded_file = st.sidebar.file_uploader(label="Choose a file", 
-                                     accept_multiple_files=False, 
-                                     type=['pdf'])
-    loader = PyMuPDFLoader(uploaded_file.name)
+def get_doc(uploaded_file):
+    loader = PyMuPDFLoader(uploaded_file)
     data = loader.load()
     return data
+
+uploaded_file = st.sidebar.file_uploader("Upload a PDF", type="pdf")
+if uploaded_file is not None:
+
+    # Save the uploaded file temporarily
+    with open("temp.pdf", "wb") as f:
+        f.write(uploaded_file.getbuffer())
+
+    # Load the document using PyMuPDFLoader
+    data = get_doc("temp.pdf")
+    st.write("File successfully loaded!")
+else:
+    st.write("Please upload a PDF file.")

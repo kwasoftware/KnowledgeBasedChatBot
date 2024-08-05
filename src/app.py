@@ -5,7 +5,6 @@ from langchain_core.runnables.history import RunnableWithMessageHistory
 import streamlit as st
 import get_chain_elements
 
-
 question_answer_chain = get_chain_elements.get_question_answer_chain()
 history_aware_retriever = get_chain_elements.get_history_aware_retriever()
 

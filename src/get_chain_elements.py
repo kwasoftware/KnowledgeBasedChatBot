@@ -5,7 +5,7 @@ import set_env, set_retriever, upload_file
 
 #Grabs model and retriever from imported files  
 model = set_env.init_model()
-data = upload_file.get_doc()
+data = upload_file.data
 retriever = set_retriever.init_retriever(data)
 
 #Creates a retriever that is aware of chat history and previous context
