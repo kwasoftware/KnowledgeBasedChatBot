@@ -13,8 +13,7 @@ import streamlit as st
 @st.cache_resource
 def init_retriever(data):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
-    if data is not None:
-        splits = text_splitter.split_documents(data)
-        vectorstore = Chroma.from_documents(documents=splits, embedding=OpenAIEmbeddings())
-        retriever = vectorstore.as_retriever()
-        return retriever
+    splits = text_splitter.split_documents(data)
+    vectorstore = Chroma.from_documents(documents=splits, embedding=OpenAIEmbeddings())
+    retriever = vectorstore.as_retriever()
+    return retriever
