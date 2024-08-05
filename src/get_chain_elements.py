@@ -1,11 +1,12 @@
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.chains import create_history_aware_retriever
 from langchain.chains.combine_documents import create_stuff_documents_chain
-import set_env, set_retriever
+import set_env, set_retriever, upload_file
 
 #Grabs model and retriever from imported files
 model = set_env.init_model()
-retriever = set_retriever.init_retriever()
+data = upload_file.get_doc()
+retriever = set_retriever.init_retriever(data)
 
 #Creates a retriever that is aware of chat history and previous context
 def get_history_aware_retriever():
