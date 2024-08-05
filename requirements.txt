@@ -7,3 +7,4 @@ chromadb==0.5.3
 pypdf
 PyMuPDF
 langchain_openai
+pysqlite3-binary
