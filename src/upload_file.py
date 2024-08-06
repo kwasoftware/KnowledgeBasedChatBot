@@ -4,7 +4,7 @@ import streamlit as st
 st.title("Knowledge Bot")
 
 #Uploads the file from the pdf
-def get_doc(uploaded_file):
+def get_doc():
     uploaded_file = st.sidebar.file_uploader("Upload a PDF", type="pdf")
     if uploaded_file is not None:
 
