@@ -19,3 +19,4 @@ def get_doc():
         return data
     else:
         st.write("Please upload a PDF file.")
+        get_doc()
