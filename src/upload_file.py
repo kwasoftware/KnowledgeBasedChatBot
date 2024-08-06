@@ -12,7 +12,7 @@ def get_doc():
         if uploaded_file is not None:
             st.session_state["uploaded_file"] = uploaded_file
         else:
-            st.stop() 
+            st.stop() #Waits for a file to be uploaded
     else:
         uploaded_file = st.session_state["uploaded_file"]
         st.write("File uploaded successfully!")
@@ -24,5 +24,6 @@ def get_doc():
         # Load the document using PyMuPDFLoader
         loader = PyMuPDFLoader("temp.pdf")
         data = loader.load()
-        print(data)
+        if not data:
+            st.stop() #Waits for data to be processed
         return data
