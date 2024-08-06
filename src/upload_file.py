@@ -4,6 +4,7 @@ import streamlit as st
 st.title("Knowledge Bot")
 
 def get_doc():
+    
     # Check if the file is already uploaded
     if "uploaded_file" not in st.session_state:
         # Function to handle file upload
@@ -11,7 +12,7 @@ def get_doc():
         if uploaded_file is not None:
             st.session_state["uploaded_file"] = uploaded_file
         else:
-            st.stop()  # Stop the script execution here until a file is uploaded
+            st.stop() 
     else:
         uploaded_file = st.session_state["uploaded_file"]
         st.write("File uploaded successfully!")
