@@ -4,7 +4,7 @@ import streamlit as st
 st.title("Knowledge Bot")
 
 def get_doc():
-    
+
     # Check if the file is already uploaded
     if "uploaded_file" not in st.session_state:
         # Function to handle file upload
@@ -24,4 +24,5 @@ def get_doc():
         # Load the document using PyMuPDFLoader
         loader = PyMuPDFLoader("temp.pdf")
         data = loader.load()
+        print(data)
         return data
