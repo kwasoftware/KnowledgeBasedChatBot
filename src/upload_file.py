@@ -28,5 +28,6 @@ def get_doc():
         data = loader.load()
 
         if data is None:
+            print(type(data))
             st.stop() #Waits for data to be processed
         return data
