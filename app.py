@@ -1,14 +1,8 @@
 import os
-
-#Required for deployment to streamlit
-import sys
-__import__('pysqlite3')
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 from dotenv import load_dotenv
 from langchain.chains import create_history_aware_retriever, create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_chroma import Chroma
-import chromadb
 from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_community.document_loaders import PyMuPDFLoader
 from langchain_core.chat_history import BaseChatMessageHistory
@@ -18,11 +12,10 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 import streamlit as st
 
-
-#Loads environment variables such as the API key and sets llm model
 load_dotenv()
 os.environ['OPENAI_API_KEY'] = os.environ.get("OPENAI_API_KEY")
 
+#Loads environment variables such as the API key and sets llm model
 @st.cache_resource
 def init_model():
     llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
@@ -36,9 +29,6 @@ def load_documents():
     data = loader.load()
     return data
 data = load_documents()
-
-st.write("Chromadb version:", chromadb.__version__)
-st.write("Chromadb attributes:", dir(chromadb))
 
 #Splits the loaded data and stores the split data into vectors to be retrieved later on
 @st.cache_resource
