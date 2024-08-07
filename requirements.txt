@@ -3,7 +3,7 @@ langchain
 langchain-community
 langchainhub
 langchain-chroma
-chromadb==0.5.3
+chromadb
 pypdf
 PyMuPDF
 langchain_openai
