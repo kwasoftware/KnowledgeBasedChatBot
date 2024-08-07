@@ -1,8 +1,11 @@
 import os
+
+#Required for deployment to streamlit
 import sys
 __import__('pysqlite3')
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import sqlite3
+import chromadb
 from dotenv import load_dotenv
 from langchain.chains import create_history_aware_retriever, create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
@@ -17,10 +20,10 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 import streamlit as st
 
 
+#Loads environment variables such as the API key and sets llm model
 load_dotenv()
 os.environ['OPENAI_API_KEY'] = os.environ.get("OPENAI_API_KEY")
 
-#Loads environment variables such as the API key and sets llm model
 @st.cache_resource
 def init_model():
     llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
