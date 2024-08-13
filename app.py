@@ -1,4 +1,9 @@
 import os
+
+#Required for deployment to streamlit
+import sys
+__import__('pysqlite3')
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 from dotenv import load_dotenv
 from langchain.chains import create_history_aware_retriever, create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
@@ -12,10 +17,11 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 import streamlit as st
 
+
+#Loads environment variables such as the API key and sets llm model
 load_dotenv()
 os.environ['OPENAI_API_KEY'] = os.environ.get("OPENAI_API_KEY")
 
-#Loads environment variables such as the API key and sets llm model
 @st.cache_resource
 def init_model():
     llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
@@ -63,11 +69,11 @@ history_aware_retriever = create_history_aware_retriever(
 ### Answer question ###
 system_prompt = (
     "You are an assistant for question-answering tasks"
-    "You are an expert on the Department of Energy and information given to you"
+    "You are an expert on the Department of Energy and information inside the document fy24_acquisition_guide_fy2024_v4.pdf"
     "When answering questions, be specific and in depth"
-    "State the source of your data at the end of each and every question unless it is a greeting"
-    "If they ask you something that is not in your data source say you dont know"
-    "Only and exclusively answer questions based on the documents provided."
+    "State the source of your data which should be from chapters inside fy24_acquisition_guide_fy2024_v4.pdf.  There are a total of 71.4 chapters."
+    "at the end of each and every question unless it is a greeting"
+    "If they ask you something that is not in the context (fy24_acquisition_guide_fy2024_v4.pdf) say you dont know"
     "When ask what you know don't state specifics, but be very general and broad"
     "Use the following pieces of retrieved context to answer "
     "the question. If you don't know the answer, say that you "
@@ -104,7 +110,7 @@ conversational_rag_chain = RunnableWithMessageHistory(
     output_messages_key="answer",
 )
 
-st.title("Knowledge Bot")
+st.title("DOE Procurement Bot")
 
 def display_messages():
 
